@@ -1,17 +1,18 @@
-import './App.css';
-
-function App() {
+import React from "react";
+import NavBar from "./components/Navbar";
+import { Route, Routes } from "react-router-dom";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+const App = () => {
   return (
-    <main>
-      <header>
-        <a href="" className="logo">MyBlog</a>
-        <nav>
-          <a href="">Login</a>
-          <a href="">Register</a>
-        </nav>
-      </header>
-    </main>
+    <>
+      <NavBar />
+      <Routes>
+        <Route exact path="/" element={Home} />
+      </Routes>
+      <Footer />
+    </>
   );
-}
+};
 
 export default App;

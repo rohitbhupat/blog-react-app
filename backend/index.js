@@ -19,8 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 //Routes
 const blogRoutes = require("./routes/blogRoutes");
 const userRoutes = require("./routes/userRoutes");
+const commentRoutes = require("./routes/commentRoutes");
 app.use("/api", blogRoutes);
 app.use("/api", userRoutes);
+app.use("/api", commentRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

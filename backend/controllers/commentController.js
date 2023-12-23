@@ -39,7 +39,43 @@ const getCommentsByPost = async (req, res) => {
   }
 };
 
+const editComment = async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const { content } = req.body;
+
+    const updatedComment = await Comment.findByIdAndUpdate(
+      commentId,
+      { content },
+      { new: true }
+    );
+    if (!updatedComment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+    res.json(updatedComment);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+const deleteComment = async (req, res) => {
+  try {
+    const commentId = req.params.commentId;
+    const deletedComment = await Comment.findByIdAndDelete(commentId);
+    if (!deletedComment) {
+      return res.status(404).json({ error: "Comment not found" });
+    }
+    res.json({ message: "Comment deleted successfully..." });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 module.exports = {
   createComment,
   getCommentsByPost,
+  editComment,
+  deleteComment,
 };
